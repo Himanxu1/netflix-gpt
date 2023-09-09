@@ -6,3 +6,6 @@
 # Done
 -Login page
 -Sign up page
+- authenctication with firebase
+- deployed to firebase
+- configure redux store
