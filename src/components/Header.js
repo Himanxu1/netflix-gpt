@@ -2,15 +2,16 @@ import React, { useState,useEffect } from "react";
 import {IoMdArrowDropdown} from 'react-icons/io'
 import {FaUserAlt} from 'react-icons/fa'
 import {TbLogout2} from 'react-icons/tb'
-import {  signOut } from "firebase/auth";
+import {  onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
 
 
 const Header = () => {
   const [isOpen,setIsOpen] = useState(false);
-  
+  const dispatch = useDispatch()
   const user = useSelector((store)=>store.user)
   const navigate = useNavigate()
   const handlehover= () =>{
@@ -18,13 +19,25 @@ const Header = () => {
   }
 
   const handleSignout= () =>{
-   
-    signOut(auth).then(() => {
-      navigate('/')
-    }).catch((error) => {
+    signOut(auth).then(() => {}).catch((error) => {
      console.log(error)
     });
   }
+   
+  useEffect(()=>{
+   const subscribe=  onAuthStateChanged(auth, (user) => {
+      if (user) {
+        
+        const {uid,email,displayName,photoURL} = user;
+        dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}))
+       navigate("/home")
+      } else {
+        dispatch(removeUser()) 
+        navigate("/")
+      }
+    });
+    return () => subscribe()
+  },[])
   return (
     <div className="absolute z-40 w-full flex justify-between items-center">
       <img

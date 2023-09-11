@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import Header from "../components/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { checkValidation } from "../utils/validate";
 import {  signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { LOGO } from "../utils/constants";
 
 
 
 const Login = () => {
   const [errorMessage,setErrorMessage] = useState("")
-  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -23,7 +23,6 @@ const Login = () => {
 
     const user = userCredential.user;
     console.log(user)
-    navigate('/home')
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -32,13 +31,16 @@ const Login = () => {
   });
    
   }
+ const handleGuestLogin = () =>{
+   email.current.value="himanshu"
+ }
   return (
     <div>
       <Header />
       <div>
         <div className="absolute">
           <img
-            src="https://assets.nflxext.com/ffe/siteui/vlv3/855ed6e2-d9f1-4afd-90da-96023ec747c3/85eb5b91-25ed-4965-ace9-ba8e4a0ead8d/IN-en-20230828-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
+            src={LOGO}
             alt="backgroud"
             className="w-full "
           />
@@ -66,6 +68,7 @@ const Login = () => {
           <p className="text-white ml-2 mt-2">
             new user ? <Link to="/signup" className="text-red-600 ml-1">Sign Up</Link>{" "}
           </p>
+          <p className="text-red-400 ml-2" onClick={handleGuestLogin}>continue as guest</p>
         </form>
       </div>
     </div>
