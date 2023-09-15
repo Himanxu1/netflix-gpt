@@ -8,7 +8,7 @@ const SecondaryContainer = () => {
   const topratedMovie = useSelector(store =>  store?.movie.topratedMovie)
   const upcomingMovie = useSelector(store =>  store?.movie.upcomingMovie)
   return (
-    <div className='bg-black -mt-20 '>
+    <div className='bg-black xl:-mt-20 sm:-mt-10'>
       <MovieList title={"Now Playing" } movies={nowPlayingMovies} />
       <MovieList title={"Popular" } movies={popularMovie} />
       <MovieList title={"Top Rated" } movies={topratedMovie} />

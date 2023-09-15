@@ -7,6 +7,9 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import GptSearch from "./GptSearch";
+import { changeLanguage } from "../utils/ConfigSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
 
 
 const Header = () => {
@@ -14,6 +17,8 @@ const Header = () => {
   const dispatch = useDispatch()
   const user = useSelector((store)=>store.user)
   const navigate = useNavigate()
+ const showgtsearch = useSelector(store=>store?.gpt.showGptSearch)
+
   const handlehover= () =>{
     setIsOpen(!isOpen)
   }
@@ -38,17 +43,33 @@ const Header = () => {
     });
     return () => subscribe()
   },[])
+  const handleLanguageSelect = (e) =>{
+     dispatch(changeLanguage(e.target.value))
+  }
   return (
     <div className="absolute z-40 w-full flex justify-between items-center">
       <img
         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
         alt="netflix-logo"
-        className="w-44 p-2 h-28"
+        className=" w-28 xl:w-44 p-2 h-20 xl:h-28 "
       />
+    
+      <div className="xl:ml-[880px] sm:ml-0 flex items-center md:ml-[400px]">
+        {
+          showgtsearch &&  (
+            <select className="h-8 mr-2 rounded " onChange={handleLanguageSelect}>
+            {SUPPORTED_LANGUAGES.map((lang)=> <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
+             </select>
+          )
+        }
+      
+      <GptSearch />
+      </div>
 
 {
   user && (
-<div>
+<div >
+
       <div className="flex items-center mr-4">
         <img
           alt="user-icon"

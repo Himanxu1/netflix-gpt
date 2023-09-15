@@ -5,6 +5,23 @@ export const API_OPTION= {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYTNmNTQzMmI5MTlkODRhOTkzZjQzY2MxYjRiZDI1NiIsInN1YiI6IjYzMGRkODlhY2FhNTA4MDA3YTVkYmI4MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Bckmpbk8-yRRX8uMmmUGkj6ZVEvrxd2Tjd4bErWP9rU'
+      Authorization: 'Bearer '+process.env.REACT_APP_BEAR_TOKEN
     }
   };
+
+  export const SUPPORTED_LANGUAGES = [
+    {
+      identifier:"en",
+      name:'English'
+    },
+    {
+      identifier:"hindi",
+      name:'Hindi'
+    },
+    {
+      identifier:"spanish",
+      name:'Spanish'
+    },
+  ]
+
+  export const OPENAI_KEY=process.env.REACT_APP_OPENAI_KEY

@@ -22,7 +22,7 @@ const Login = () => {
   .then((userCredential) => {
 
     const user = userCredential.user;
-    console.log(user)
+
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -68,7 +68,7 @@ const Login = () => {
           <p className="text-white ml-2 mt-2">
             new user ? <Link to="/signup" className="text-red-600 ml-1">Sign Up</Link>{" "}
           </p>
-          <p className="text-red-400 ml-2" onClick={handleGuestLogin}>continue as guest</p>
+  
         </form>
       </div>
     </div>
