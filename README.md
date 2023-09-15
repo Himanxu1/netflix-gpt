@@ -1,7 +1,3 @@
-# to be done
-1. routing
-2. folder structure
-3. login/header/
 
 # Done
 - Login page
@@ -15,4 +11,11 @@
 - Build the home page completely
 - made design look good
 - use image from the tmdb api
+- Integrate OPEN AI API
+- build GPT Search page with gpt page components
+- diffenent slice for gpt
+- Multilanguage support in search bar and button
+- Responsive design for mobile and desktop
+- Used memoization for reducing api calls
+- Get suggested movies from the open ai api
 
